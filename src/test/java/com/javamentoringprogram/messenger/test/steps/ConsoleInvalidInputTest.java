@@ -1,4 +1,4 @@
-package com.javamentoringprogram.messenger.test.step.definishions;
+package com.javamentoringprogram.messenger.test.steps;
 
 import com.javamentoringprogram.messenger.consolemode.ReadAttributesFromConsole;
 import org.junit.Before;

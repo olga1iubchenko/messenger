@@ -1,4 +1,3 @@
-import com.javamentoringprogram.messenger.consolemode.ReadAttributesFromConsole;
 import com.javamentoringprogram.messenger.enums.TemplateAttributeEnum;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
@@ -28,7 +27,7 @@ class MessengerApp {
 //            System.err.println("I/O failed.");
 //        }
 //
-//        Map<TemplateAttributeEnum, String> listOfInputAttributes;
+        Map<TemplateAttributeEnum, String> listOfInputAttributes;
 //
 //        if ( System.getProperty("file.name").length() != 0 && System.getProperty("file.emailTemplateText").length() != 0 ){
 //            ReadAttributesFromConsole readAttributesFromConsoleMode = new ReadAttributesFromConsole();
@@ -53,11 +52,13 @@ class MessengerApp {
 //        WriteOutputEmailTextToConsole writeOutputEmailTextToConsole = new WriteOutputEmailTextToConsole();
 //        writeOutputEmailTextToConsole.printGeneratedEmailToConsole();
 
-        Map<TemplateAttributeEnum, String> listOfInputAttributes;
+//        Map<TemplateAttributeEnum, String> listOfInputAttributes;
+//
+//        ReadAttributesFromConsole readAttributesFromConsoleMode = new ReadAttributesFromConsole();
+//            readAttributesFromConsoleMode.getFilteredInput();
+//            listOfInputAttributes = readAttributesFromConsoleMode.createMapOfInputData();
+//        System.out.println(listOfInputAttributes);
 
-        ReadAttributesFromConsole readAttributesFromConsoleMode = new ReadAttributesFromConsole();
-            readAttributesFromConsoleMode.getFilteredInput();
-            listOfInputAttributes = readAttributesFromConsoleMode.createMapOfInputData();
-        System.out.println(listOfInputAttributes);
+
     }
 }

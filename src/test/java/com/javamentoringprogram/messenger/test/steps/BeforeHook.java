@@ -1,4 +1,4 @@
-package com.javamentoringprogram.messenger.test.step.definishions;//package com.javamentoringprogram.messenger.testStepDefinishions;
+package com.javamentoringprogram.messenger.test.steps;//package com.javamentoringprogram.messenger.testStepDefinishions;
 
 import com.javamentoringprogram.messenger.consolemode.ReadAttributesFromConsole;
 import cucumber.annotation.Before;

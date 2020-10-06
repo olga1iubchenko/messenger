@@ -37,9 +37,9 @@ public class ReadAttributesFromFile {
             log.info("File written Successfully");
 
         }catch(IOException e){
-        System.out.println(String.format("An error occurred while reading file: %s", e));
-        e.printStackTrace();
-    }finally {
+            System.out.println(String.format("An error occurred while reading file: %s", e));
+            e.printStackTrace();
+        }finally {
             try {
                 if (inputFileWriter != null)
                     inputFileWriter.close();
@@ -49,28 +49,28 @@ public class ReadAttributesFromFile {
         }
     }
 
-     private List<String> getListOfAttributesFromFile(String inputFileName, String emailTextWithAttributes) {
-         List<String> listOfAttributes = new ArrayList<>();
-         writeInputToFile(inputFileName, emailTextWithAttributes);
-         try (Stream<String> stream = Files.lines(Paths.get(inputFileName))) {
-             stream
-                     .filter(line -> line != null && line.length() > 0)
-                     .map(line -> line.split("\\s+"))
-                     .forEach(word -> {
-                         for (String str : word)
-                             if (str.contains("#{")) {
-                                 String filteredWord = str.substring(str.indexOf("{"), str.indexOf("}")).replace("{", "");
-                                 listOfAttributes.add(filteredWord);
-                             }
-                     });
-         } catch (IOException e) {
-             e.printStackTrace();
-         }
-         return listOfAttributes;
-     }
+    public List<String> getListOfAttributesFromFile(String inputFileName, String emailTextWithAttributes) {
+        List<String> listOfAttributes = new ArrayList<>();
+        writeInputToFile(inputFileName, emailTextWithAttributes);
+        try (Stream<String> stream = Files.lines(Paths.get(inputFileName))) {
+            stream
+                    .filter(line -> line != null && line.length() > 0)
+                    .map(line -> line.split("\\s+"))
+                    .forEach(word -> {
+                        for (String str : word)
+                            if (str.contains("#{")) {
+                                String filteredWord = str.substring(str.indexOf("{"), str.indexOf("}")).replace("{", "");
+                                listOfAttributes.add(filteredWord);
+                            }
+                    });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return listOfAttributes;
+    }
 
 
-     public Map<TemplateAttributeEnum, String> createMapOfInputDataFromFile(final String inputFileName, final String emailTextWithAttributes){
+    public Map<TemplateAttributeEnum, String> createMapOfInputDataFromFile(final String inputFileName, final String emailTextWithAttributes){
         Map<TemplateAttributeEnum, String> inputMap = new HashMap();
         List<String> attributesForEmailTemplate = getListOfAttributesFromFile(inputFileName, emailTextWithAttributes);
         try {

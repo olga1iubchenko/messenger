@@ -23,7 +23,7 @@ public class EmailTextGenerator {
             valuesMap.put("receiver.name", inputData.get(RECEIVER_NAME));
             valuesMap.put("sender.name", inputData.get(SENDER_NAME));
             valuesMap.put("sender.position", inputData.get(SENDER_POSITION));
-        } 
+        }
         catch (Exception e) {
             e.printStackTrace();
         }
@@ -49,4 +49,3 @@ public class EmailTextGenerator {
         return EmailSubjectString;
     }
 }
-

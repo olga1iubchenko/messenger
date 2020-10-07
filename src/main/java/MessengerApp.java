@@ -1,5 +1,3 @@
-import com.javamentoringprogram.messenger.consolemode.ReadAttributesFromConsole;
-import com.javamentoringprogram.messenger.consolemode.WriteOutputEmailTextToConsole;
 import com.javamentoringprogram.messenger.enums.TemplateAttributeEnum;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
@@ -30,29 +28,36 @@ class MessengerApp {
 //        }
 //
         Map<TemplateAttributeEnum, String> listOfInputAttributes;
-//
+
 //        if ( System.getProperty("file.name").length() != 0 && System.getProperty("file.emailTemplateText").length() != 0 ){
-//            ReadAttributesFromConsole readAttributesFromConsoleMode = new ReadAttributesFromConsole();
-//            readAttributesFromConsoleMode.getReader();
-//            readAttributesFromConsoleMode.getFilteredInput();
-//            listOfInputAttributes = readAttributesFromConsoleMode.createMapOfInputData();
+//       ReadAttributesFromConsole readAttributesFromConsoleMode = new ReadAttributesFromConsole();
+//        listOfInputAttributes = readAttributesFromConsoleMode.createMapOfInputData(readAttributesFromConsoleMode.getFilteredInputFromConsole());
+////        System.out.println(listOfInputAttributes);
+////        EmailTextGenerator emailTextGenerator = new EmailTextGenerator();
+////        String emailText = emailTextGenerator.getEmailText(emailTextGenerator.getEmailTextMapper(listOfInputAttributes));
+////        String emailSubject = emailTextGenerator.getEmailSubject(emailTextGenerator.getEmailTextMapper(listOfInputAttributes));
+////        System.out.println(emailText);
+////        System.out.println(emailSubject);
+//        WriteOutputEmailTextToConsole writeOutputEmailTextToConsole = new WriteOutputEmailTextToConsole();
+//        writeOutputEmailTextToConsole.printGeneratedEmailToConsole(listOfInputAttributes);
 //        }else{
 //            ReadAttributesFromFile readAttributesFromFileMode = new ReadAttributesFromFile();
 //            readAttributesFromFileMode.writeInputToFile(System.getProperty("file.name"), System.getProperty("file.emailTemplateText"));
-//            listOfInputAttributes = readAttributesFromFileMode.createMapOfInputDataFromFile(System.getProperty("file.name"), System.getProperty("file.emailTemplateText"));
+//            List<String> filteredList = readAttributesFromFileMode.getListOfAttributesFromFile("test-file", "Test #{TestSubject} and  #{TestReceiverName} and #{TestSenderName} and #{TestSenderPosition}")
+//            listOfInputAttributes = readAttributesFromFileMode.createMapOfInputDataFromFile(filteredList);
 //        }
 
 
-        ReadAttributesFromConsole readAttributesFromConsoleMode = new ReadAttributesFromConsole();
-        listOfInputAttributes = readAttributesFromConsoleMode.createMapOfInputData(readAttributesFromConsoleMode.getFilteredInputFromConsole());
-//        System.out.println(listOfInputAttributes);
-//        EmailTextGenerator emailTextGenerator = new EmailTextGenerator();
-//        String emailText = emailTextGenerator.getEmailText(emailTextGenerator.getEmailTextMapper(listOfInputAttributes));
-//        String emailSubject = emailTextGenerator.getEmailSubject(emailTextGenerator.getEmailTextMapper(listOfInputAttributes));
-//        System.out.println(emailText);
-//        System.out.println(emailSubject);
-        WriteOutputEmailTextToConsole writeOutputEmailTextToConsole = new WriteOutputEmailTextToConsole();
-        writeOutputEmailTextToConsole.printGeneratedEmailToConsole(listOfInputAttributes);
+//        ReadAttributesFromConsole readAttributesFromConsoleMode = new ReadAttributesFromConsole();
+//        listOfInputAttributes = readAttributesFromConsoleMode.createMapOfInputData(readAttributesFromConsoleMode.getFilteredInputFromConsole());
+////        System.out.println(listOfInputAttributes);
+////        EmailTextGenerator emailTextGenerator = new EmailTextGenerator();
+////        String emailText = emailTextGenerator.getEmailText(emailTextGenerator.getEmailTextMapper(listOfInputAttributes));
+////        String emailSubject = emailTextGenerator.getEmailSubject(emailTextGenerator.getEmailTextMapper(listOfInputAttributes));
+////        System.out.println(emailText);
+////        System.out.println(emailSubject);
+//        WriteOutputEmailTextToConsole writeOutputEmailTextToConsole = new WriteOutputEmailTextToConsole();
+//        writeOutputEmailTextToConsole.printGeneratedEmailToConsole(listOfInputAttributes);
 
 
 //        //TODO: Update with instanceof
@@ -69,6 +74,12 @@ class MessengerApp {
 //            listOfInputAttributes = readAttributesFromConsoleMode.createMapOfInputData();
 //        System.out.println(listOfInputAttributes);
 
+
+//        ReadAttributesFromFile readAttributesFromFileMode = new ReadAttributesFromFile();
+//        readAttributesFromFileMode.writeInputToFile(System.getProperty("file.name"), System.getProperty("file.emailTemplateText"));
+//        List<String> filteredList = readAttributesFromFileMode.getListOfAttributesFromFile("test-file", "Test #{TestSubject} and  #{TestReceiverName} and #{TestSenderName} and #{TestSenderPosition}");
+//        listOfInputAttributes = readAttributesFromFileMode.createMapOfInputDataFromFile(filteredList);
+//        System.out.println(listOfInputAttributes);
 
     }
 }

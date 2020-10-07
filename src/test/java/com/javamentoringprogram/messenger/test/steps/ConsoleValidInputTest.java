@@ -72,7 +72,7 @@ public class ConsoleValidInputTest {
                 "Kind regards \n" +
                 "TestSenderName \n" +
                 "TestSenderPosition ";
-        
+
         final WriteOutputEmailTextToConsole writeOutputEmailTextToConsole = new WriteOutputEmailTextToConsole();
         final String generatedEmailText = (String.format("%s \n %s", writeOutputEmailTextToConsole.getEmailSubjectOutputToConsole(listOfAttributes), writeOutputEmailTextToConsole.getEmailTextOutputToConsole(listOfAttributes)));
         Assert.assertEquals(expectedEmailText, generatedEmailText);

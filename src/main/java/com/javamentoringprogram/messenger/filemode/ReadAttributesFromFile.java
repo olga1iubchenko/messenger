@@ -1,6 +1,7 @@
 package com.javamentoringprogram.messenger.filemode;
 
 import com.javamentoringprogram.messenger.enums.TemplateAttributeEnum;
+import io.cucumber.messages.internal.com.google.common.collect.ImmutableMap;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
@@ -12,12 +13,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
 import static com.javamentoringprogram.messenger.enums.TemplateAttributeEnum.*;
+
 
 @Log4j2
 @Getter
@@ -49,9 +50,9 @@ public class ReadAttributesFromFile {
         }
     }
 
-    public List<String> getListOfAttributesFromFile(String inputFileName, String emailTextWithAttributes) {
-        List<String> listOfAttributes = new ArrayList<>();
-        writeInputToFile(inputFileName, emailTextWithAttributes);
+    public List<String> getListOfAttributesFromFile(String inputFileName) {
+        List<String> listOfAttributesFromFile = new ArrayList<>();
+        //readFileAsString(filePath);
         try (Stream<String> stream = Files.lines(Paths.get(inputFileName))) {
             stream
                     .filter(line -> line != null && line.length() > 0)
@@ -60,34 +61,23 @@ public class ReadAttributesFromFile {
                         for (String str : word)
                             if (str.contains("#{")) {
                                 String filteredWord = str.substring(str.indexOf("{"), str.indexOf("}")).replace("{", "");
-                                listOfAttributes.add(filteredWord);
+                                listOfAttributesFromFile.add(filteredWord);
                             }
                     });
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return listOfAttributes;
+        return listOfAttributesFromFile;
     }
 
 
-    public Map<TemplateAttributeEnum, String> createMapOfInputDataFromFile(final String inputFileName, final String emailTextWithAttributes){
-        Map<TemplateAttributeEnum, String> inputMap = new HashMap();
-        List<String> attributesForEmailTemplate = getListOfAttributesFromFile(inputFileName, emailTextWithAttributes);
-        try {
-            System.out.println("Dear user, please enter following required attributes for email generation");
-            System.out.println("Please enter email subject");
-            inputMap.put(EMAIL_SUBJECT, attributesForEmailTemplate.get(0));
-            System.out.println("Please enter receiver's name");
-            inputMap.put(RECEIVER_NAME, attributesForEmailTemplate.get(1));
-            System.out.println("Please enter sender's name");
-            inputMap.put(SENDER_NAME, attributesForEmailTemplate.get(3));
-            System.out.println("Please enter sender's position");
-            inputMap.put(SENDER_POSITION, attributesForEmailTemplate.get(4));
-        }catch(Exception e){
-            log.error("Cant retrieve required attribute. Please review file content");
-            e.printStackTrace();
+    public Map<TemplateAttributeEnum, String> createMapOfInputDataFromFile(List<String> listOfAttributes){
+            return ImmutableMap.<TemplateAttributeEnum, String>builder()
+                    .put(EMAIL_SUBJECT, listOfAttributes.get(0))
+                    .put(RECEIVER_NAME, listOfAttributes.get(1))
+                    .put(SENDER_NAME, listOfAttributes.get(2))
+                    .put(SENDER_POSITION, listOfAttributes.get(3))
+                    .build();
         }
-        return inputMap;
     }
 
-}

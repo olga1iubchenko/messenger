@@ -1,12 +1,12 @@
 package com.javamentoringprogram.messenger;
 
 import com.javamentoringprogram.messenger.enums.TemplateAttributeEnum;
+import io.cucumber.messages.internal.com.google.common.collect.ImmutableMap;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.text.StrSubstitutor;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import static com.javamentoringprogram.messenger.enums.TemplateAttributeEnum.*;
@@ -16,36 +16,24 @@ import static com.javamentoringprogram.messenger.enums.TemplateAttributeEnum.*;
 @Log4j2
 public class EmailTextGenerator {
 
-    public String getEmailText(Map <TemplateAttributeEnum, String> inputData) {
-        Map<String, String> valuesMap = new HashMap();
-        try {
-            valuesMap.put("email.subject", inputData.get(EMAIL_SUBJECT));
-            valuesMap.put("receiver.name", inputData.get(RECEIVER_NAME));
-            valuesMap.put("sender.name", inputData.get(SENDER_NAME));
-            valuesMap.put("sender.position", inputData.get(SENDER_POSITION));
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        StrSubstitutor sub = new StrSubstitutor(valuesMap);
-        String EmailTextString = sub.replace(EmailTextTemplate.EMAIL_TEXT_TEMPLATE);
-        System.out.println(EmailTextString);
-        return EmailTextString;
+    public  Map<String,String> getEmailTextMapper(Map <TemplateAttributeEnum, String> listOfAttributes) {
+        return ImmutableMap.<String, String>builder()
+                .put("email.subject", listOfAttributes.get(EMAIL_SUBJECT))
+                .put("receiver.name", listOfAttributes.get(RECEIVER_NAME))
+                .put("sender.name", listOfAttributes.get(SENDER_NAME))
+                .put("sender.position", listOfAttributes.get(SENDER_POSITION))
+                .build();
     }
 
-    public static String getEmailSubject(Map <TemplateAttributeEnum, String> inputData) {
-        Map<String, String> valuesMap = new HashMap();
-        try {
-            valuesMap.put("email.subject", inputData.get(EMAIL_SUBJECT));
-        }
-        catch (Exception e) {
-            log.error("Cant retrieve required attribute. Please review input and try again");
-            e.printStackTrace();
-        }
+        public String getEmailText(Map <String,String> mapper) {
+        StrSubstitutor sub = new StrSubstitutor(mapper);
+        String emailTextString = sub.replace(EmailTextTemplate.EMAIL_TEXT_TEMPLATE);
+        return emailTextString;
+    }
 
-        StrSubstitutor sub = new StrSubstitutor(valuesMap);
-        String EmailSubjectString = sub.replace(EmailTextTemplate.EMAIL_SUBJECT_TEMPLATE);
-        return EmailSubjectString;
+    public static String getEmailSubject(Map <String,String> mapper) {
+        StrSubstitutor sub = new StrSubstitutor(mapper);
+        String emailSubjectString = sub.replace(EmailTextTemplate.EMAIL_SUBJECT_TEMPLATE);
+        return emailSubjectString;
     }
 }

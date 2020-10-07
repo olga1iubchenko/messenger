@@ -28,7 +28,7 @@ public class ConsoleInvalidInputTest {
     @Before
     public void setUp() {
         doReturn(bufferedReader).when(consoleReader).getReader();
-        doCallRealMethod().when(consoleReader).getFilteredInput();
+        //doCallRealMethod().when(consoleReader).getFilteredInputFromConsole();
     }
 
     @Test

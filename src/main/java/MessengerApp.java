@@ -1,3 +1,5 @@
+import com.javamentoringprogram.messenger.consolemode.ReadAttributesFromConsole;
+import com.javamentoringprogram.messenger.consolemode.WriteOutputEmailTextToConsole;
 import com.javamentoringprogram.messenger.enums.TemplateAttributeEnum;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
@@ -41,14 +43,22 @@ class MessengerApp {
 //        }
 
 
-//        ReadAttributesFromConsole readAttributesFromConsoleMode = new ReadAttributesFromConsole();
-//       // readAttributesFromConsoleMode.closeReader();
-//
-//
+        ReadAttributesFromConsole readAttributesFromConsoleMode = new ReadAttributesFromConsole();
+        listOfInputAttributes = readAttributesFromConsoleMode.createMapOfInputData(readAttributesFromConsoleMode.getFilteredInputFromConsole());
+//        System.out.println(listOfInputAttributes);
+//        EmailTextGenerator emailTextGenerator = new EmailTextGenerator();
+//        String emailText = emailTextGenerator.getEmailText(emailTextGenerator.getEmailTextMapper(listOfInputAttributes));
+//        String emailSubject = emailTextGenerator.getEmailSubject(emailTextGenerator.getEmailTextMapper(listOfInputAttributes));
+//        System.out.println(emailText);
+//        System.out.println(emailSubject);
+        WriteOutputEmailTextToConsole writeOutputEmailTextToConsole = new WriteOutputEmailTextToConsole();
+        writeOutputEmailTextToConsole.printGeneratedEmailToConsole(listOfInputAttributes);
+
+
 //        //TODO: Update with instanceof
 //        EmailTextGenerator emailTextGenerator = new EmailTextGenerator();
-//        emailTextGenerator.getEmailSubject(readAttributesFromConsoleMode.createMapOfInputData());
-//        emailTextGenerator.getEmailText(readAttributesFromConsoleMode.createMapOfInputData());
+//        emailTextGenerator.getEmailSubject(readAttributesFromConsoleMode.createMapOfInputData(readAttributesFromConsoleMode.getFilteredInputFromConsole()));
+//        emailTextGenerator.getEmailText(readAttributesFromConsoleMode.createMapOfInputData(readAttributesFromConsoleMode.getFilteredInputFromConsole()));
 //        WriteOutputEmailTextToConsole writeOutputEmailTextToConsole = new WriteOutputEmailTextToConsole();
 //        writeOutputEmailTextToConsole.printGeneratedEmailToConsole();
 

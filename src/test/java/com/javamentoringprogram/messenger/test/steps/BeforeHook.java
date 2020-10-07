@@ -28,6 +28,6 @@ public class BeforeHook {
     @Before("@setUpConsoleMockAndConsoleReaderSpy")
     public void setUp() throws IOException {
         doReturn(bufferedReader).when(consoleReader).getReader();
-        doCallRealMethod().when(consoleReader).getFilteredInput();
+        doCallRealMethod().when(consoleReader).getFilteredInputFromConsole();
     }
 }

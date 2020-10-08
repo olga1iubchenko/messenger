@@ -1,2 +1,0 @@
-Feature: Transfer step validation
-

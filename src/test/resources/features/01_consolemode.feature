@@ -14,7 +14,7 @@ Feature: Console mode testing
     Given console up and running
     Then user enter '<invalidInput>' and '<expectedException>' occurs
     Examples:
-      |invalidInput                                                                                                                      | expectedException        |                                                
+      |invalidInput                                                                                                                      | expectedException        |
       | Test #{TestSubject} and and #{TestSenderName} and #{TestSenderPosition}                                                          | NullPointerException     |
       | Test #{TestSubject} and  #{TestReceiverName} and #{TestSenderName} and #{TestSenderPosition} but one more #{TestRedundantat} test| IndexOutOfBoundsException|
 

@@ -52,7 +52,6 @@ public class ReadAttributesFromFile {
 
     public List<String> getListOfAttributesFromFile(String inputFileName) {
         List<String> listOfAttributesFromFile = new ArrayList<>();
-        //readFileAsString(filePath);
         try (Stream<String> stream = Files.lines(Paths.get(inputFileName))) {
             stream
                     .filter(line -> line != null && line.length() > 0)

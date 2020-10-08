@@ -7,9 +7,12 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "",
+        features = "src/test/resources/features",
         monochrome = true,
-        plugin = {"pretty", "com.epam.reportportal.cucumber.ScenarioReporter"})
+        plugin = {"json:target/cucumber-report/[CUCABLE:RUNNER].json","pretty"},
+        glue = {"src/test/java/com/javamentoringprogram/messenger/cucmberstepdefinitions"},
+        dryRun = false )
+
 public class TestRunner {
 
 }

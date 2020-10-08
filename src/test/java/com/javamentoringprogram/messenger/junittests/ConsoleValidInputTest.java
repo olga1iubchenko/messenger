@@ -1,13 +1,15 @@
-package com.javamentoringprogram.messenger.test.steps;
+package com.javamentoringprogram.messenger.junittests;
 
 import com.javamentoringprogram.messenger.consolemode.ReadAttributesFromConsole;
 import com.javamentoringprogram.messenger.consolemode.WriteOutputEmailTextToConsole;
 import com.javamentoringprogram.messenger.enums.TemplateAttributeEnum;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.gen5.api.BeforeEach;
 import org.junit.gen5.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
@@ -18,8 +20,10 @@ import java.io.IOException;
 import java.util.*;
 
 import static com.javamentoringprogram.messenger.enums.TemplateAttributeEnum.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 
+@DisplayName("Console Mode valid tests")
 public class ConsoleValidInputTest {
 
     @Rule
@@ -29,13 +33,15 @@ public class ConsoleValidInputTest {
     private BufferedReader bufferedReader = Mockito.mock(BufferedReader.class);
     private ReadAttributesFromConsole consoleReader = spy(new ReadAttributesFromConsole());
 
-    @Before
+    @BeforeEach
     public void setUp() {
         doReturn(bufferedReader).when(consoleReader).getReader();
         //doCallRealMethod().when(consoleReader).getFilteredInputFromConsole();
     }
 
     @Test
+    @DisplayName("Test of ConsoleMode with valid input using Mockito")
+    @Tag("smoke")
     public void testValidInputGetFilteredInputFromConsole() throws IOException {
         final List<String> expectedListOfAttributes = new ArrayList<>(Arrays.asList("TestSubject","TestReceiverName", "TestSenderName", "TestSenderPosition"));
         final String testInput = "Test #{TestSubject} and  #{TestReceiverName} and #{TestSenderName} and #{TestSenderPosition}";
@@ -45,6 +51,8 @@ public class ConsoleValidInputTest {
     }
 
     @Test
+    @DisplayName("Test of ConsoleMode with valid input using Mockito")
+    @Tag("smoke")
     public void testCreateMapOfInputData(){
         final List<String> expectedListOfAttributes = new ArrayList<>(Arrays.asList("TestSubject","TestReceiverName", "TestSenderName", "TestSenderPosition"));
         final Map<TemplateAttributeEnum, String> expectedMap = new HashMap<>() {

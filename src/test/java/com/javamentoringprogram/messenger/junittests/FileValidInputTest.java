@@ -1,4 +1,4 @@
-package com.javamentoringprogram.messenger.test.steps;
+package com.javamentoringprogram.messenger.junittests;
 
 import com.javamentoringprogram.messenger.filemode.ReadAttributesFromFile;
 import com.javamentoringprogram.messenger.utils.FileHelper;
@@ -37,12 +37,12 @@ public class FileValidInputTest {
     @Test
     public void testValidInputWrittenToFile() throws IOException {
         fileReader.writeInputToFile("test-input", testInput);
-        verify(fileHelperMock).createDirectory("test_input");
+        verify(fileHelperMock).createDirectory("test-input");
     }
 
     @Test
     public void testValidInputFromFileAndFiltering() throws IOException {
-        verify(fileReader).writeInputToFile("test", testInput);
+        verify(fileReader).writeInputToFile("test-input", testInput);
         List<String>testListOfAttributes = fileReader.getListOfAttributesFromFile("file-input");
         List<String> expectedListOfAttributes = new ArrayList<>(Arrays.asList("TestSubject","TestReceiverName", "TestSenderName", "TestSenderPosition"));
         Assert.assertEquals(expectedListOfAttributes, testListOfAttributes);

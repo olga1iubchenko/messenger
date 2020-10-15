@@ -1,70 +1,58 @@
 package com.javamentoringprogram.messenger.junittests.extensions;
 
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.extension.*;
 
-import java.io.IOException;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
-import static org.mockito.Matchers.any;
+/**
+ *
+ */
+public class TemporaryDirectoryExtension implements AfterEachCallback, TestInstancePostProcessor, ParameterResolver {
 
+    private final List<TemporaryDirectory> temporaryDirectoryList_;
 
-public class TemporaryDirectoryExtension implements ParameterResolver, AfterEachCallback {
-    @Override
-    public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
-        return parameterContext.getParameter().getType().equals(Path.class);
-    }
-
-    @SneakyThrows
-    @Override
-    public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext)  {
-       return extensionContext.getStore(ExtensionContext.Namespace.GLOBAL).getOrComputeIfAbsent("root", key -> {
-           try {
-               return createTempDir();
-           } catch (IOException e) {
-               e.printStackTrace();
-           }
-           return null;
-       });
-    }
-
-    private Path createTempDir() throws IOException {
-       try{
-           return Files.createTempDirectory("tmpTestSir");
-       }catch(IOException e){
-           throw new ParameterResolutionException("couldn't create temp dir", e);
-       }
-
+    public TemporaryDirectoryExtension() {
+        temporaryDirectoryList_ = new ArrayList<>();
     }
 
     @Override
     public void afterEach(ExtensionContext extensionContext) throws Exception {
-             Object root = extensionContext.getStore(any()).get("root", Path.class);
-             if(root != null){
-                 deleteRecursively((Path) root);
-             }
+        temporaryDirectoryList_.forEach(TemporaryDirectory::close);
+        temporaryDirectoryList_.clear();
     }
 
-    private void deleteRecursively (Path root) throws IOException {
-        Files.walkFileTree(root, new SimpleFileVisitor<Path>(){
 
-            @Override
-           public  FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException{
-             Files.delete(file);
-             return super.visitFile(file, attrs);
-        }
+    @Override
+    public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
+        return parameterContext.getParameter().getType() == TemporaryDirectory.class;
+    }
 
-              @Override
-             public FileVisitResult postVisitDirectory (Path dir, IOException exc) throws IOException{
-                Files.delete(dir);
-                return super.postVisitDirectory(dir, exc);
-              }
-    });
+    @Override
+    public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
+        return createTemporaryDirectory();
+    }
 
+
+    @Override
+    public void postProcessTestInstance(Object testInstance, ExtensionContext context) throws Exception {
+        Stream.of(testInstance.getClass().getDeclaredFields())
+                .filter(field -> field.getType() == TemporaryDirectory.class)
+                .forEach(field -> {
+                    field.setAccessible(true);
+                    TemporaryDirectory t = createTemporaryDirectory();
+                    try {
+                        field.set(testInstance, t);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+    }
+
+    private TemporaryDirectory createTemporaryDirectory() {
+        TemporaryDirectory t = new TemporaryDirectory();
+        temporaryDirectoryList_.add(t);
+        return t;
     }
 }
-

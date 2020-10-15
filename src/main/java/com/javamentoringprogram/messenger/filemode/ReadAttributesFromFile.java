@@ -50,7 +50,7 @@ public class ReadAttributesFromFile {
         }
     }
 
-    public List<String> getListOfAttributesFromFile(String inputFileName) {
+    public List<String> getListOfAttributesFromFile(String fileName, String inputFileName) {
         List<String> listOfAttributesFromFile = new ArrayList<>();
         try (Stream<String> stream = Files.lines(Paths.get(inputFileName))) {
             stream

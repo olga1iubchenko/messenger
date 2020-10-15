@@ -10,8 +10,8 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         monochrome = true,
         plugin = {"json:target/cucumber-report/[CUCABLE:RUNNER].json","pretty"},
-        glue = {"src/test/java/com/javamentoringprogram/messenger/cucmberstepdefinitions"},
-        dryRun = false )
+        glue = {"src/test/java/com/javamentoringprogram/messenger/cucmberstepdefinitions"}
+)
 
 public class TestRunner {
 

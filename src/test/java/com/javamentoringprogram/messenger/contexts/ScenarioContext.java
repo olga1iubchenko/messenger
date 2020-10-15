@@ -18,12 +18,10 @@ public class ScenarioContext {
     }
 
     public <T> T getContext(Context key) {
-        //noinspection LambdaBodyCanBeCodeBlock,SimplifyOptionalCallChains,unchecked
         return ofNullable(context.get(key)).map(obj -> (T) obj).orElse(null);
    }
 
     public enum Context {
         FILTERED_TEST_INPUT
-
     }
 }

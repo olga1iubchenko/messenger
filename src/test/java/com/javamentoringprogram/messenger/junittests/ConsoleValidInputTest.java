@@ -36,7 +36,6 @@ public class ConsoleValidInputTest {
     @BeforeEach
     public void setUp() {
         doReturn(bufferedReader).when(consoleReader).getReader();
-        //doCallRealMethod().when(consoleReader).getFilteredInputFromConsole();
     }
 
     @Test

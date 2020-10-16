@@ -8,7 +8,7 @@ import org.junit.jupiter.api.extension.Extension;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
-public class DisabledOnDemoExtention implements TestExecutionCondition, Extension {
+public class DisabledOnDemoExtension implements TestExecutionCondition, Extension {
     @Override
     public ConditionEvaluationResult evaluate(TestExtensionContext testExtensionContext) {
         return LocalDate.now().getDayOfWeek() == DayOfWeek.FRIDAY

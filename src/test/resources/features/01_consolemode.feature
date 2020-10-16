@@ -16,6 +16,6 @@ Feature: Console mode testing
     Examples:
       |invalidInput                                                                                                                      | expectedException        |
       | Test #{TestSubject} and and #{TestSenderName} and #{TestSenderPosition}                                                          | NullPointerException     |
-      | Test #{TestSubject} and  #{TestReceiverName} and #{TestSenderName} and #{TestSenderPosition} but one more #{TestRedundantat} test| IndexOutOfBoundsException|
+      | Test #{TestSubject} and  #{TestReceiverName} and #{TestSenderName} and #{TestSenderPosition} but one more #{TestRedundant} test| IndexOutOfBoundsException|
 
 

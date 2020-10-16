@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
-    @ExtendWith(DisabledOnDemoExtention.class)
+    @ExtendWith(DisabledOnDemoExtension.class)
     public @interface DisableOnDemo {}
 
